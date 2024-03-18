@@ -1,13 +1,13 @@
 import React from 'react';
-import { useNavigate, Routes, Route, Router, Outlet, Link} from 'react-router-dom'
+import { Outlet, Link} from 'react-router-dom'
 import DateTime from './component/DateTime'
 import SideMenu from './component/SideMenu'
-import { Layout, Flex, Col, Divider, Row, Input} from 'antd';
+import { Layout, Flex, Col, Row, Input} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import logoImg from './assets/logo.png'
+import downArrowImg from './assets/downArrow.svg'
 
-
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const layoutStyle = {
   borderRadius: '0, 0',
@@ -45,19 +45,12 @@ const contentStyle: React.CSSProperties = {
 };
 
 
-const row1Style : React.CSSProperties = {
-  // position: 'absolute',
-  // textAlign: 'left',
-  // padding: '2px 2px 2px 2px',
-  // boxSizing: 'border-box',
-  // width: '100%'
-  // backgroundColor: '#047EA3',
-  // paddingBottom: '5%',
+const headerRow1Style : React.CSSProperties = {
   backgroundColor: '#047EA3',
   height: '30%',
   color: '#FFFFFF',
 }
-const row2Style : React.CSSProperties = {
+const headerRow2Style : React.CSSProperties = {
   // position: 'absolute',
   // textAlign: 'left',
   // padding: '2px 2px 2px 2px',
@@ -69,46 +62,51 @@ const row2Style : React.CSSProperties = {
   height: '70%',
   padding: '-1px',
   color: '#FFFFFF',
+  alignItems: 'center'
 }
 
 const logoStyle : React.CSSProperties = {
-  height: '95%',
+  width: '90%',
   paddingLeft: '10%'
 }
-const textStyle : React.CSSProperties = {
+const headerTextStyle : React.CSSProperties = {
   // fontFamily: 'Microsoft YaHei', sans-serif,
     fontWeight: '400',
     fontStyle: 'normal',
     fontSize: '30px',
     // lineHeight: 3,
-    alignItems: 'bottom'
 }
 const searchInputStyle : React.CSSProperties = {
   // verticalAlign: '-40px',
 }
 
-
+const handleLanguageChange = ()=> {
+    alert()
+}
 
 const aaa=5;
 
 const App: React.FC = () => (
   <Flex wrap="wrap">
     <Layout style={layoutStyle}>
-        <Row style={row1Style}>
+        <Row style={headerRow1Style}>
           <Col span={24}>
             <DateTime></DateTime>
           </Col>
         </Row>
-        <Row style={row2Style}>
-          <Col span={3}>
+        <Row style={headerRow2Style}>
+          <Col span={4}>
             <Link to='/'>
               <img src={logoImg} style={logoStyle} alt='logo'></img>
             </Link>
           </Col>
-          <Col span={8} style={textStyle}>
-            <span>中文</span>
+          <Col span={7} style={headerTextStyle}>
+            <div onClick={()=> handleLanguageChange()}>
+              <span>中文</span>
+              <span><img src={downArrowImg} alt="downArrowImg" /></span>
+            </div>
           </Col>
-          <Col span={4} style={textStyle}>
+          <Col span={4} style={headerTextStyle}>
             <span>应用</span>
           </Col>
           <Col span={7}>

@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 const textStyle : React.CSSProperties = {
     width: '100%',
     paddingLeft: '1%',
-    verticalAlign: 'top',
     color: '#FFFFFF',
 }
 
