@@ -1,11 +1,14 @@
-import React from 'react';
-import { Outlet, Link} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import DateTime from './component/DateTime'
 import SideMenu from './component/SideMenu'
 import { Layout, Flex, Col, Row, Input} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import logoImg from './assets/logo.png'
 import downArrowImg from './assets/downArrow.svg'
+import {routes, routesMap} from './router';
+import { useTranslation } from "react-i18next";
+import "./i18n";
 
 const { Sider, Content } = Layout;
 
@@ -26,8 +29,6 @@ const headerStyle: React.CSSProperties = {
 };
 
 const siderStyle: React.CSSProperties = {
-  // textAlign: 'center',
-  // lineHeight: '120px',
   color: '#fff',
   backgroundColor:  '#047EA3',
   // height:'1200px',
@@ -80,54 +81,54 @@ const searchInputStyle : React.CSSProperties = {
   // verticalAlign: '-40px',
 }
 
-const handleLanguageChange = ()=> {
-    alert()
-}
 
-const aaa=5;
 
-const App: React.FC = () => (
-  <Flex wrap="wrap">
-    <Layout style={layoutStyle}>
-        <Row style={headerRow1Style}>
-          <Col span={24}>
-            <DateTime></DateTime>
-          </Col>
-        </Row>
-        <Row style={headerRow2Style}>
-          <Col span={4}>
-            <Link to='/'>
-              <img src={logoImg} style={logoStyle} alt='logo'></img>
-            </Link>
-          </Col>
-          <Col span={7} style={headerTextStyle}>
-            <div onClick={()=> handleLanguageChange()}>
-              <span>中文</span>
-              <span><img src={downArrowImg} alt="downArrowImg" /></span>
-            </div>
-          </Col>
-          <Col span={4} style={headerTextStyle}>
-            <span>应用</span>
-          </Col>
-          <Col span={7}>
-              <Input  style={searchInputStyle} size="large" placeholder="Search App" prefix={<SearchOutlined />} />
-          </Col>
-          <Col span={1}>
-              
-          </Col>
-        </Row>
-      <Layout>
-        <Sider width="10%" style={siderStyle}>
-            <SideMenu/>
-        </Sider>
-        <Content style={contentStyle}>
-           <Outlet/>
-        </Content>
+const App: React.FC = () => {
+  const location = useLocation();
+  const route = routesMap.get(location.pathname);
+  const { t, i18n } = useTranslation();
+
+  return (
+    <Flex wrap="wrap">
+      <Layout style={layoutStyle}>
+          <Row style={headerRow1Style}>
+            <Col span={24}>
+              <DateTime></DateTime>
+            </Col>
+          </Row>
+          <Row style={headerRow2Style}>
+            <Col span={4}>
+              <Link to='/'>
+                <img src={logoImg} style={logoStyle} alt='logo'></img>
+              </Link>
+            </Col>
+            <Col span={7} style={headerTextStyle}>
+              <div onClick={() => { i18n.changeLanguage(i18n.language == 'en' ? 'zh' : 'en')}}>
+                <span>{t('lang')}</span>
+                <span><img src={downArrowImg} alt="downArrowImg" /></span>
+              </div>
+            </Col>
+            <Col span={4} style={headerTextStyle}>
+              <span>{ !!route? t(route.key) : '应用' }</span>
+            </Col>
+            <Col span={7}>
+                <Input  style={searchInputStyle} size="large" placeholder="Search App" prefix={<SearchOutlined />} />
+            </Col>
+            <Col span={1}>
+                
+            </Col>
+          </Row>
+        <Layout>
+          <Sider width="10%" style={siderStyle}>
+              <SideMenu />
+          </Sider>
+          <Content style={contentStyle}>
+            <Outlet/>
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
-    
-  </Flex>
-    
-);
+    </Flex>
+  )
+};
 
 export default App;

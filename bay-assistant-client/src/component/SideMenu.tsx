@@ -1,8 +1,9 @@
-import React, { MouseEventHandler, useState } from 'react';
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import { useNavigate, Routes, Route, Link } from 'react-router-dom'
-import routes from '../router';
+import React from 'react';
+import { Link } from 'react-router-dom'
+import {routes} from '../router';
 import './SideMenu.css';
+import { useTranslation } from "react-i18next";
+import "../i18n";
 
 const ulStyle : React.CSSProperties = {
     padding: 0,
@@ -10,25 +11,21 @@ const ulStyle : React.CSSProperties = {
     listStyle: 'none'
 }
 
-
-
-const handleClick = (item:any) => {
-    // navigate(item.href)
-}
-
 const SideMenu: React.FC = () => {
+    const { t } = useTranslation();
+
     return (
         <nav>
             <ul style={ulStyle} id="side-menu">
             {
                 routes.map((item:any)=>{
-                return <li key={item.key}>
+                return <li key={item.key} >
                     <Link to={item.href}>
                         <div>
                             <img src={item.icon} alt='icon'></img>
                         </div>
                         <div>
-                            <span>{item.label}</span>
+                            <span>{t(item.key)}</span>
                         </div>
                     </Link>
                 </li>

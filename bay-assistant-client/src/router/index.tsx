@@ -47,4 +47,9 @@ const routes:Array<any> = [
     },
 ]
 
-export default routes;
+const routesMap = new Map();
+for(let i = 0; i < routes.length; i++) {
+    routesMap.set(routes[i].href, routes[i]);
+}
+
+export {routes, routesMap};

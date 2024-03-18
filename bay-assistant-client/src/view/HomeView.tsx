@@ -1,4 +1,4 @@
-import { Layout, Flex, Col, Divider, Row, Input} from 'antd';
+import {Col, Row} from 'antd';
 import { Link } from 'react-router-dom'
 import home1Img from '../assets/home1.png';
 import home2Img from '../assets/home2.png';
