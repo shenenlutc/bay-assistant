@@ -1,0 +1,11 @@
+#side-menu li{
+    list-style: 'none';
+    padding-bottom: 20px;
+}
+
+#side-menu a{
+    color: #fff;
+}
+#side-menu li img{
+    width: 50%;
+}
