@@ -25,7 +25,9 @@ const colStyle : React.CSSProperties = {
 }
 
 const home1ImgStyle : React.CSSProperties = {
-    padding: '10px',
+    paddingLeft: '10px',
+    paddingTop: '10px',
+    paddingRight: '8px',
     width: '100%',
     height: '100%'
 }
@@ -36,7 +38,6 @@ const home2ImgStyle : React.CSSProperties = {
     height: '49%'
 }
 const home3ImgStyle : React.CSSProperties = {
-    paddingBottom: '10px',
     paddingRight: '10px',
     width: '100%',
     height: '50%'

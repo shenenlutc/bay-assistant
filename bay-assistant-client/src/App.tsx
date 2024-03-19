@@ -22,17 +22,11 @@ const layoutStyle = {
   height: '100%',
 };
 
-const headerStyle: React.CSSProperties = {
-  height: '10vh',
-  backgroundColor: '#047EA3',
-  padding: 0,
-};
-
 const siderStyle: React.CSSProperties = {
   color: '#fff',
   backgroundColor:  '#047EA3',
   // height:'1200px',
-  height: '90vh',
+  height: '91vh',
   overflow: 'auto',
 };
 
@@ -40,7 +34,7 @@ const siderStyle: React.CSSProperties = {
 const contentStyle: React.CSSProperties = {
   color: '#000',
   backgroundColor: '#EDEDED',
-  height: '90vh',
+  height: '91vh',
   // height: '1200px',
   overflow: 'auto',
 };
@@ -52,13 +46,7 @@ const headerRow1Style : React.CSSProperties = {
   color: '#FFFFFF',
 }
 const headerRow2Style : React.CSSProperties = {
-  // position: 'absolute',
-  // textAlign: 'left',
-  // padding: '2px 2px 2px 2px',
   // boxSizing: 'border-box',
-  // width: '100%'
-  // backgroundColor: '#047EA3',
-  // paddingBottom: '5%',
   backgroundColor: '#047EA3',
   height: '70%',
   padding: '-1px',
@@ -77,6 +65,10 @@ const headerTextStyle : React.CSSProperties = {
     fontSize: '30px',
     // lineHeight: 3,
 }
+const searchInputColStyle : React.CSSProperties = {
+  textAlign:"right"
+}
+
 const searchInputStyle : React.CSSProperties = {
   // verticalAlign: '-40px',
 }
@@ -102,20 +94,17 @@ const App: React.FC = () => {
                 <img src={logoImg} style={logoStyle} alt='logo'></img>
               </Link>
             </Col>
-            <Col span={7} style={headerTextStyle}>
+            <Col span={6} style={headerTextStyle}>
               <div onClick={() => { i18n.changeLanguage(i18n.language == 'en' ? 'zh' : 'en')}}>
                 <span>{t('lang')}</span>
                 <span><img src={downArrowImg} alt="downArrowImg" /></span>
               </div>
             </Col>
-            <Col span={5} style={headerTextStyle}>
-              <span>{ !!route? t(route.key) :  t('application') }</span>
+            <Col span={6} style={headerTextStyle}>
+              <span>{ !!route? t(route.key) : t('application') }</span>
             </Col>
-            <Col span={6}>
-                <Input  style={searchInputStyle} size="large" placeholder="Search App" prefix={<SearchOutlined />} />
-            </Col>
-            <Col span={1}>
-                
+            <Col span={7} style={searchInputColStyle}>
+                <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />} />
             </Col>
           </Row>
         <Layout>
