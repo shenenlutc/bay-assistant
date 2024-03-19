@@ -4,10 +4,12 @@ import home1Img from '../assets/home1.png';
 import home2Img from '../assets/home2.png';
 import home3Img from '../assets/home3.png';
 import allAppIcon from '../assets/allAppIcon.png';
-import clainPersonnelIcon from '../assets/clainPersonnelIcon.png';
+import claimPersonnelIcon from '../assets/claimPersonnelIcon.png';
 import officeIcon from '../assets/officeIcon.png';
 import myUsualIcon from '../assets/myUsualIcon.png';
 import marketingIcon from '../assets/marketingIcon.png';
+import { useTranslation } from "react-i18next";
+import "../i18n";
 
 const row1Style : React.CSSProperties = {
     height: '35%'
@@ -41,6 +43,7 @@ const home3ImgStyle : React.CSSProperties = {
 }
 
 const HomeView: React.FC = () => {
+    const { t } = useTranslation();
     return (
         <>
             <Row style={row1Style}>
@@ -61,17 +64,17 @@ const HomeView: React.FC = () => {
                        
                     </div>
                     <div>
-                        <span>所有应用</span>
+                        <span>{t('allApp')}</span>
                     </div>
                 </Col>
                 <Col span={8}>
                     <div>
                         <Link to='/'>
-                            <img src={clainPersonnelIcon} alt='logo'></img>
+                            <img src={claimPersonnelIcon} alt='logo'></img>
                         </Link>
                     </div>
                     <div>
-                        <span>报销及人事</span>
+                        <span>{t('claimPersonnel')}</span>
                     </div>
                 </Col>
                 <Col span={8}>
@@ -81,7 +84,7 @@ const HomeView: React.FC = () => {
                         </Link>
                     </div>
                     <div>
-                        <span>办公助手</span>
+                        <span>{t('office')}</span>
                     </div>
                 </Col>
             </Row>
@@ -93,7 +96,7 @@ const HomeView: React.FC = () => {
                         </Link>
                     </div>
                     <div>
-                        <span>我的常用</span>
+                        <span>{t('myUsual')}</span>
                     </div>
                 </Col>
                 <Col span={12}>
@@ -103,7 +106,7 @@ const HomeView: React.FC = () => {
                         </Link>
                     </div>
                     <div>
-                        <span>市场及营销</span>
+                        <span>{t('marketing')}</span>
                     </div>
                 </Col>
             </Row>

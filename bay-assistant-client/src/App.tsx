@@ -67,7 +67,7 @@ const headerRow2Style : React.CSSProperties = {
 }
 
 const logoStyle : React.CSSProperties = {
-  width: '90%',
+  width: '80%',
   paddingLeft: '10%'
 }
 const headerTextStyle : React.CSSProperties = {
@@ -108,10 +108,10 @@ const App: React.FC = () => {
                 <span><img src={downArrowImg} alt="downArrowImg" /></span>
               </div>
             </Col>
-            <Col span={4} style={headerTextStyle}>
-              <span>{ !!route? t(route.key) : '应用' }</span>
+            <Col span={5} style={headerTextStyle}>
+              <span>{ !!route? t(route.key) :  t('application') }</span>
             </Col>
-            <Col span={7}>
+            <Col span={6}>
                 <Input  style={searchInputStyle} size="large" placeholder="Search App" prefix={<SearchOutlined />} />
             </Col>
             <Col span={1}>
