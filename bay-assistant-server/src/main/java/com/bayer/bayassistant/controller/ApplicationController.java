@@ -24,9 +24,10 @@ public class ApplicationController {
         return applicationService.findAll();
     }
 
-    @GetMapping("findAllBcsApp")
-    public List<Application> findAllBcsApp(){
-        return applicationService.findAllBcsApp();
+    @GetMapping("findAllBhcApp")
+    public List<Application> findAllBhcApp(){
+        return applicationService.findAllBhcApp();
     }
+
 
 }

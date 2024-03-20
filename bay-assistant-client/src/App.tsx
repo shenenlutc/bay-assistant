@@ -119,7 +119,7 @@ const App: React.FC = () => {
             </Col>
           </Row>
         <Layout>
-          <Sider width="10%" style={siderStyle}>
+          <Sider width="11%" style={siderStyle}>
               <SideMenu />
           </Sider>
           <Content style={contentStyle}>
