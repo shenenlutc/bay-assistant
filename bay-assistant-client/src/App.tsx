@@ -36,7 +36,7 @@ const contentStyle: React.CSSProperties = {
   backgroundColor: '#EDEDED',
   height: '91vh',
   // height: '1200px',
-  overflow: 'auto',
+  // overflow: 'auto',
 };
 
 

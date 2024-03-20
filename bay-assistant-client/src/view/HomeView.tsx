@@ -59,7 +59,7 @@ const HomeView: React.FC = () => {
             <Row style={row2Style}  justify="end">
                 <Col span={8}>
                     <div>
-                        <Link to='/application/:0'>
+                        <Link to='/application/all'>
                             <img src={allAppIcon} alt='logo'></img>
                         </Link>
                        

@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element: <HomeView />,
             },
             {
-                path: "application/:categoryId",
+                path: "application/all",
                 element: <Application />,
             },
             ...routes.map(r=>{

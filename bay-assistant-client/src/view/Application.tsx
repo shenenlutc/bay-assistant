@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Col, Row, Button } from 'antd';
 import logo from '../assets/img/logo.png'; //图标
 import { List, ListRowRenderer, AutoSizer} from 'react-virtualized';
-import '../assets/style/applicantAll.scss';
+import '../assets/style/applicant.scss';
 import { formatData } from '../utils/formatData';
 import '../i18n';
 import { useTranslation } from 'react-i18next';
@@ -46,7 +46,6 @@ const Application: React.FC = () => {
   }
   const rowRenderer: ListRowRenderer = ({ index, key, style }) => {
     const letter = dataIndex[index];
-    const text = '这是一段非常非常长的文字，需要鼠标悬浮显示完整内容。';
     return (
       <div key={key} style={style} className='dataCss'>
         <div className='title'>{letter}</div>
@@ -76,6 +75,8 @@ const Application: React.FC = () => {
         className='dataIndex-item'
         key={item}
         onClick={() => {
+            console.log("索引号：===",index);
+            
           myListRef.current?.scrollToRow(index);
         }}>
         <span className={activeIndex === index ? 'index-active' : ''}>{item}</span>
@@ -94,7 +95,7 @@ const Application: React.FC = () => {
   return (
     <div className='applicant'>
       {/* 列表数据 */}
-      <AutoSizer>{({ width, height }) => <List ref={myListRef} width={width} height={height} rowCount={dataIndex.length} rowHeight={getRowHeight} rowRenderer={rowRenderer} onRowsRendered={({ startIndex }) => onRowsRendered(startIndex)} scrollToAlignment='start' />}</AutoSizer>
+      <AutoSizer>{({ width, height }) => <List ref={myListRef} width={width} height={height} rowCount={dataIndex.length} rowHeight={getRowHeight} rowRenderer={rowRenderer} onRowsRendered={({ startIndex }) => onRowsRendered(startIndex)} scrollToAlignment='start'  scrollToIndex={-1} />}</AutoSizer>
       {/* 右侧索引列表 */}
       <ul className='dataIndex'>{renderRightIndex()}</ul>
     </div>
