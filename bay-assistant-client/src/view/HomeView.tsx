@@ -1,13 +1,13 @@
 import {Col, Row} from 'antd';
 import { Link } from 'react-router-dom'
-import home1Img from '../assets/home1.png';
-import home2Img from '../assets/home2.png';
-import home3Img from '../assets/home3.png';
-import allAppIcon from '../assets/allAppIcon.png';
-import claimPersonnelIcon from '../assets/claimPersonnelIcon.png';
-import officeIcon from '../assets/officeIcon.png';
-import myUsualIcon from '../assets/myUsualIcon.png';
-import marketingIcon from '../assets/marketingIcon.png';
+import home1Img from '../assets/img/home1.png';
+import home2Img from '../assets/img/home2.png';
+import home3Img from '../assets/img/home3.png';
+import allAppIcon from '../assets/img/allAppIcon.png';
+import claimPersonnelIcon from '../assets/img/claimPersonnelIcon.png';
+import officeIcon from '../assets/img/officeIcon.png';
+import myUsualIcon from '../assets/img/myUsualIcon.png';
+import marketingIcon from '../assets/img/marketingIcon.png';
 import { useTranslation } from "react-i18next";
 import "../i18n";
 
@@ -59,7 +59,7 @@ const HomeView: React.FC = () => {
             <Row style={row2Style}  justify="end">
                 <Col span={8}>
                     <div>
-                        <Link to='/'>
+                        <Link to='/application/:0'>
                             <img src={allAppIcon} alt='logo'></img>
                         </Link>
                        

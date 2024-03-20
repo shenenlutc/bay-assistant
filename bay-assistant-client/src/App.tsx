@@ -4,8 +4,8 @@ import DateTime from './component/DateTime'
 import SideMenu from './component/SideMenu'
 import { Layout, Flex, Col, Row, Input} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import logoImg from './assets/logo.png'
-import downArrowImg from './assets/downArrow.svg'
+import logoImg from './assets/img/logo.png'
+import downArrowImg from './assets/img/downArrow.svg'
 import {routes, routesMap} from './router';
 import { useTranslation } from "react-i18next";
 import "./i18n";

@@ -17,7 +17,11 @@ const router = createBrowserRouter([
                 element: <HomeView />,
             },
             {
-                path: "application/:type",
+                path: "/application",
+                element: <HomeView />,
+            },
+            {
+                path: "application/:categoryId",
                 element: <Application />,
             },
             ...routes.map(r=>{

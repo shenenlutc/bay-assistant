@@ -3,11 +3,11 @@ import Faq from '../view/Faq';
 import Notice from '../view/Notice';
 import About from '../view/About';
 import Help from '../view/Help';
-import appIcon from '../assets/appIcon.png';
-import noticeIcon from '../assets/noticeIcon.png';
-import faqIcon from '../assets/faqIcon.png';
-import aboutIcon from '../assets/aboutIcon.png';
-import helpIcon from '../assets/helpIcon.png';
+import appIcon from '../assets/img/appIcon.png';
+import noticeIcon from '../assets/img/noticeIcon.png';
+import faqIcon from '../assets/img/faqIcon.png';
+import aboutIcon from '../assets/img/aboutIcon.png';
+import helpIcon from '../assets/img/helpIcon.png';
 
 const routes:Array<any> = [
     {
