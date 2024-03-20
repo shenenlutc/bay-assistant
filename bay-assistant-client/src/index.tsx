@@ -17,7 +17,11 @@ const router = createHashRouter([
                 element: <HomeView />,
             },
             {
-                path: "application/:type",
+                path: "/application",
+                element: <HomeView />,
+            },
+            {
+                path: "application/all",
                 element: <Application />,
             },
             ...routes.map(r=>{

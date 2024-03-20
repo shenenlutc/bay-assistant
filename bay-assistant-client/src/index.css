@@ -12,3 +12,9 @@ html, body {
 #root {
   padding: 0px;
 }
+ul {
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
