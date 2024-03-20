@@ -65,6 +65,17 @@ const headerTextStyle : React.CSSProperties = {
     fontSize: '30px',
     // lineHeight: 3,
 }
+const downArrowImgStyle : React.CSSProperties = {
+  position: 'relative',
+  left: '7px',
+  bottom: '4px',
+  // paddingLeft: '20px',
+  width: '18px',
+  height: '10px',
+  transform: 'rotate(180deg)'
+}
+
+
 const searchInputColStyle : React.CSSProperties = {
   textAlign:"right"
 }
@@ -97,7 +108,7 @@ const App: React.FC = () => {
             <Col span={6} style={headerTextStyle}>
               <div onClick={() => { i18n.changeLanguage(i18n.language == 'en' ? 'zh' : 'en')}}>
                 <span>{t('lang')}</span>
-                <span><img src={downArrowImg} alt="downArrowImg" /></span>
+                <span><img src={downArrowImg} style={downArrowImgStyle} alt="downArrowImg" /></span>
               </div>
             </Col>
             <Col span={6} style={headerTextStyle}>

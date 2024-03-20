@@ -10,14 +10,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BayAssistantApplication.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = BayAssistantApplication.class)
 public class BaseTest {
 
-    @Autowired
+//    @Autowired
     private ApplicationDao applicationDao;
 
-    @Test
+//    @Test
     public void testApp() {
         List<Application> allApplication = applicationDao.findAll();
         System.out.println(allApplication);

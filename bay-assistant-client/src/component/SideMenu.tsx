@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom'
 import {routes} from '../router';
 import './SideMenu.css';
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ const ulStyle : React.CSSProperties = {
     listStyle: 'none'
 }
 
+
 const SideMenu: React.FC = () => {
     const { t } = useTranslation();
 
@@ -20,14 +21,17 @@ const SideMenu: React.FC = () => {
             {
                 routes.map((item:any)=>{
                 return <li key={item.key} >
-                    <Link to={item.href}>
-                        <div>
-                            <img src={item.icon} alt='icon'></img>
-                        </div>
-                        <div>
-                            <span>{t(item.key)}</span>
-                        </div>
-                    </Link>
+                        <NavLink to={item.href}>
+                            <div className="menu-content">
+                                <div>
+                                    <img src={item.icon} alt='icon'></img>
+                                </div>
+                                <div>
+                                    <span>{t(item.key)}</span>
+                                </div>
+                            </div>    
+                        </NavLink>
+                    <div className="menu-placeholder"></div>
                 </li>
             })}
             </ul>

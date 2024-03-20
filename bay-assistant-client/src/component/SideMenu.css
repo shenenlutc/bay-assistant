@@ -1,11 +1,27 @@
 #side-menu li{
     list-style: 'none';
-    padding-bottom: 20px;
 }
 
 #side-menu a{
     color: #fff;
 }
+
+#side-menu li .menu-placeholder{
+    height: 5px;
+}
+
+#side-menu a .menu-content{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#side-menu a.active .menu-content{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #62C834;
+    border-radius: 0px 15px 15px 0px
+}
+
 #side-menu li img{
     width: 50%;
 }

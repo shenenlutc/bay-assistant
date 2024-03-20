@@ -18,4 +18,8 @@ public class ApplicationService {
         return applicationDao.findAll();
     }
 
+    public List<Application> findAllBcsApp(){
+        return applicationDao.findAll();
+    }
+
 }
