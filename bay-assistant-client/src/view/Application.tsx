@@ -70,7 +70,7 @@ const Application: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0); //指定右侧字母索引列表高亮的索引号
 
   function renderRightIndex(): JSX.Element[] {
-    return dataIndex.map((item, index) => (
+    return dataIndex.map((item:any, index:any) => (
       <li
         className='dataIndex-item'
         key={item}

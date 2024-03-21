@@ -10,13 +10,6 @@ const textStyle : React.CSSProperties = {
 
 
 const show_day = [
-    // "sun",
-    // "mon",
-    // "tues",
-    // "wed",
-    // "thur",
-    // "fri",
-    // "sat"
     "周日",
     "周一",
     "周二",

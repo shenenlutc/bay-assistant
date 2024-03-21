@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom'
 import {routes} from '../router';
 import './SideMenu.css';
 import { useTranslation } from "react-i18next";
