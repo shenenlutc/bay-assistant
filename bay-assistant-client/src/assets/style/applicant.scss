@@ -1,0 +1,87 @@
+.applicant {
+    height: 100%;
+    AutoSizer {
+        height: 100%;
+    }
+
+    .dataCss {
+    height: 100%;
+    position: relative;
+    .title {
+        font-size: 14px;
+        color: #999;
+        background-color: #f7f7f7;
+        padding: 10px 15px;
+    }
+    .name {
+        width: 33%;
+        height: 100px;
+        padding: 10px 15px;
+        border-bottom: 1px solid #eeeeee;
+        font-size: 16px;
+        color: #333;
+        background-color: #ededed;
+        cursor: pointer;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .applicationRow {
+        justify-content: flex-start;
+        .applicationCol {
+        margin: auto;
+        }
+        p {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 15px;
+        }
+        .colSpan {
+        position: absolute;
+        width: 100%;
+        .descriptionSpan {
+            font-weight: bold; //字体加粗
+
+            //多行文本溢出
+            width: 100%;
+            text-overflow: ellipsis; //文本溢出显示省略号
+            display: -webkit-box; //对象作为弹性伸缩盒子模型显示
+            -webkit-box-orient: vertical; //设置或检索伸缩盒对象的子元素的排列方式
+            -webkit-line-clamp: 2; //溢出省略的界限
+            overflow: hidden; //设置隐藏溢出元素
+        }
+        }
+
+        Button {
+        margin-top: 8px;
+        margin-left: 4px;
+        width: 100%;
+        }
+    }
+    }
+
+    // 右侧索引样式
+    .dataIndex {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        right: 5px;
+        z-index: 1;
+        height: 90%;
+        box-sizing: border-box;
+        padding-top: 20px;
+        text-align: center;
+        .dataIndex-item {
+            flex: 1;
+        }
+        .index-active {
+            color: #fff;
+            background-color: #21b97a;
+            border-radius: 100%;
+            display: inline-block;
+            font-size: 12px;
+            width: 35px;
+            height: 15px;
+            line-height: 15px;
+        }
+    }
+}
