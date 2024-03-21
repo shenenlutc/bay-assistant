@@ -70,7 +70,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={8}>
                     <div>
-                        <Link to='/'>
+                        <Link to='/application/1'>
                             <img src={claimPersonnelIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -80,7 +80,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={8}>
                     <div>
-                        <Link to='/'>
+                        <Link to='/application/4'>
                             <img src={officeIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -92,7 +92,7 @@ const HomeView: React.FC = () => {
             <Row style={row2Style}  justify="end">
                 <Col span={12}>
                     <div>
-                        <Link to='/'>
+                        <Link to='/application/2'>
                             <img src={myUsualIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -102,7 +102,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={12}>
                     <div>
-                        <Link to='/'>
+                        <Link to='/application/3'>
                             <img src={marketingIcon} alt='logo'></img>
                         </Link>
                     </div>

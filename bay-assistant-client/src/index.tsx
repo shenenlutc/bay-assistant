@@ -6,6 +6,7 @@ import {createBrowserRouter, createHashRouter, RouterProvider} from "react-route
 import HomeView from './view/HomeView';
 import {routes} from './router';
 import Application from './view/Application';
+import ApplicationType from "./view/ApplicationType"
 
 const router = createHashRouter([
     {
@@ -23,6 +24,10 @@ const router = createHashRouter([
             {
                 path: "application/all",
                 element: <Application />,
+            },
+            {
+                path: "application/:type",
+                element: <ApplicationType />,
             },
             ...routes.map(r=>{
                 return {

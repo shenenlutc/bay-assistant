@@ -23,7 +23,7 @@ const Application: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('/api/application/test')
+      .get('/api/application/list')
       .then((response) => {
         setData(response.data); // 设置数据状态
         console.log("后端返回的数据：======",response.data);

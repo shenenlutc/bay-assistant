@@ -3,12 +3,10 @@ package com.bayer.bayassistant.controller;
 
 import com.bayer.bayassistant.entity.Application;
 import com.bayer.bayassistant.service.ApplicationService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +25,15 @@ public class ApplicationController {
     @GetMapping("findAllBhcApp")
     public List<Application> findAllBhcApp(){
         return applicationService.findAllBhcApp();
+    }
+
+    @GetMapping("list")
+    public List<Application> findByMarkForDelete(){
+        return applicationService.findByMarkForDelete();
+    }
+    @GetMapping("getByAppCategoryId")
+    public List<Application> findByAppCategoryId(@RequestParam("appCategoryId") long appCategoryId){
+        return applicationService.findByAppCategoryId(appCategoryId);
     }
 
 

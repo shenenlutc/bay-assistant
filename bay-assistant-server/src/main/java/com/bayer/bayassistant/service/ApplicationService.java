@@ -22,4 +22,11 @@ public class ApplicationService {
         return applicationDao.findAll();
     }
 
+    public List<Application> findByMarkForDelete(){
+        return applicationDao.findByMarkForDelete(false);
+    }
+    public List<Application> findByAppCategoryId(long appCategoryId){
+        return applicationDao.findByAppCategoryIdAndMarkForDelete(appCategoryId,false);
+    }
+
 }
