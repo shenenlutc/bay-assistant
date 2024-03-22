@@ -1,12 +1,14 @@
+@font-face {
+  font-family: 'FZXH1JW';
+  src: url('./assets/font/FZXH1JW.TTF');
+}
+:root{
+  --FZXH1JW: FZXH1JW;
+}
 html, body {
   margin: 0px;
   background-image: none;
   position: relative;
-  /* width: 1024px;
-  height: 1366px; */
-  /* left: 0px;
-  margin-left: 0px;
-  margin-right: 0px; */
 }
 
 #root {

@@ -2,20 +2,20 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
-import {createBrowserRouter, createHashRouter, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, createHashRouter, RouterProvider, Navigate} from "react-router-dom";
 import HomeView from './view/HomeView';
 import {routes} from './router';
 import Application from './view/Application';
-import ApplicationType from "./view/ApplicationType"
+import ApplicationType from "./view/ApplicationType";
 
 const router = createHashRouter([
     {
         path: "/",
-        element: <App />,
+        element: <App/>,
         children: [
             {
                 path: "",
-                element: <HomeView />,
+                element: <Navigate to="/application" />,
             },
             {
                 path: "/application",

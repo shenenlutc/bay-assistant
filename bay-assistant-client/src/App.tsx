@@ -32,6 +32,7 @@ const siderStyle: React.CSSProperties = {
 
 
 const contentStyle: React.CSSProperties = {
+  // fontFamily:'var(--FZXH1JW)',
   color: '#000',
   backgroundColor: '#EDEDED',
   height: '91vh',
@@ -59,7 +60,7 @@ const logoStyle : React.CSSProperties = {
   paddingLeft: '10%'
 }
 const headerTextStyle : React.CSSProperties = {
-  // fontFamily: 'Microsoft YaHei', sans-serif,
+    // fontFamily:'var(--FZXH1JW)',
     fontWeight: '400',
     fontStyle: 'normal',
     fontSize: '30px',
@@ -101,7 +102,7 @@ const App: React.FC = () => {
           </Row>
           <Row style={headerRow2Style}>
             <Col span={4}>
-              <Link to='/'>
+              <Link to='/application'>
                 <img src={logoImg} style={logoStyle} alt='logo'></img>
               </Link>
             </Col>
