@@ -27,7 +27,7 @@ const siderStyle: React.CSSProperties = {
   color: '#fff',
   backgroundColor:  '#047EA3',
   // height:'1200px',
-  height: '91vh',
+  minHeight: '91vh',
   overflow: 'auto',
 };
 
@@ -36,7 +36,7 @@ const contentStyle: React.CSSProperties = {
   // fontFamily:'var(--FZXH1JW)',
   color: '#000',
   backgroundColor: '#EDEDED',
-  height: '91vh',
+  minHeight: '91vh',
   // height: '1200px',
   // overflow: 'auto',
 };

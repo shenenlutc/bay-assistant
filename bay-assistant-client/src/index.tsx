@@ -49,7 +49,7 @@ function AppParameter() {
         <MyContext.Provider value={{value,onChangeValue:setValue}}>
             <RouterProvider router={router} />
         </MyContext.Provider>
-    </React.StrictMode>
+      </React.StrictMode>
     )
-  }
+}
   
