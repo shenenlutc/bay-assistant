@@ -119,7 +119,7 @@ const App: React.FC = () => {
               <span>{ !!route? t(route.key) : t('application') }</span>
             </Col>
             <Col span={7} style={searchInputColStyle}>
-                <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />}   onBlur={(e)=>onChangeValue(e.target.value)}      />
+                <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />}   onChange={(e)=>onChangeValue(e.target.value)}      />
             </Col>
           </Row>
         <Layout>

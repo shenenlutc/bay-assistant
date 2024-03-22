@@ -13,32 +13,10 @@ const ApplicationType: React.FC = () => {
   const { type } = useParams(); //获取路径上的参数 值
   const [data, setData] = useState([]); // 用于存储获取的数据
   const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
-  const {value}  = useContext(MyContext); //头部搜索框传递过来的值
-  const prevValue= useRef(value);
-  useEffect(() => {
-    if (prevValue.current !== value) {
-      prevValue.current = value;
-      if (value.trim() != null && value.trim() != "") {
-        axios
-          .get("/api/application/getByAppCategoryIdAndName", {
-            params: { appCategoryId: type,name:value },
-          })
-          .then((response) => {
-            setData(response.data); // 设置数据状态
-            console.log("response.data=====",response.data);
-            
-          })
-          .catch((error) => {
-            console.error("Error fetching data: ", error); // 错误处理
-          });
-      } else {
-        console.log("搜索为空");
-      }
-    }
-  }, [value]);
-  
-
-  useEffect(() => {
+  const { value } = useContext(MyContext); //头部搜索框传递过来的值
+  const prevValue = useRef(value);
+  //根据分类获取所有数据
+  const getByAppCategoryId = () => {
     axios
       .get("/api/application/getByAppCategoryId", {
         params: { appCategoryId: type },
@@ -49,6 +27,32 @@ const ApplicationType: React.FC = () => {
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理
       });
+  };
+
+  useEffect(() => {
+    if (prevValue.current !== value) {
+      prevValue.current = value;
+      if (value.trim() != null && value.trim() != "") {
+        axios
+          .get("/api/application/getByAppCategoryIdAndName", {
+            params: { appCategoryId: type, name: value },
+          })
+          .then((response) => {
+            setData(response.data); // 设置数据状态
+            console.log("response.data=====", response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error); // 错误处理
+          });
+      } else {
+        //重新查询所有
+        getByAppCategoryId();
+      }
+    }
+  }, [value]);
+
+  useEffect(() => {
+    getByAppCategoryId(); //根据分类获取所有数据
     //获取的filenet数据
     axios
       .get("/api/filenet/list")
