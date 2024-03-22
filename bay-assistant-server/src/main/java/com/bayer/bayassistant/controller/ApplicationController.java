@@ -17,21 +17,21 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
-    @GetMapping("test")
+    @GetMapping("/test")
     public List<Application> test(){
         return applicationService.findAll();
     }
 
-    @GetMapping("findAllBhcApp")
+    @GetMapping("/findAllBhcApp")
     public List<Application> findAllBhcApp(){
         return applicationService.findAllBhcApp();
     }
 
-    @GetMapping("list")
+    @GetMapping("/list")
     public List<Application> findByMarkForDelete(){
         return applicationService.findByMarkForDelete();
     }
-    @GetMapping("getByAppCategoryId")
+    @GetMapping("/getByAppCategoryId")
     public List<Application> findByAppCategoryId(@RequestParam("appCategoryId") long appCategoryId){
         return applicationService.findByAppCategoryId(appCategoryId);
     }
