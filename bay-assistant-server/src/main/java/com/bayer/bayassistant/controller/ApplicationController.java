@@ -35,6 +35,14 @@ public class ApplicationController {
     public List<Application> findByAppCategoryId(@RequestParam("appCategoryId") long appCategoryId){
         return applicationService.findByAppCategoryId(appCategoryId);
     }
+    @GetMapping("getByAppCategoryIdAndName")
+    public List<Application> getByAppCategoryIdAndName(@RequestParam("appCategoryId") long appCategoryId,@RequestParam("name") String name){
+        return applicationService.findByAppCategoryIdAndName(appCategoryId,name);
+    }
 
+    @GetMapping("getByName")
+    public List<Application> getByName(@RequestParam("name") String name) {
+        return applicationService.findByName(name);
+    }
 
 }
