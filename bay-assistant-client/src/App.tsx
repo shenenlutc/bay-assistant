@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import DateTime from './component/DateTime'
 import SideMenu from './component/SideMenu'
@@ -9,6 +9,7 @@ import downArrowImg from './assets/img/downArrow.svg'
 import {routes, routesMap} from './router';
 import { useTranslation } from "react-i18next";
 import "./i18n";
+import { MyContext } from "./component/search/searchConst";
 
 const { Sider, Content } = Layout;
 
@@ -85,12 +86,14 @@ const searchInputStyle : React.CSSProperties = {
 }
 
 
-
 const App: React.FC = () => {
   const location = useLocation();
   const route = routesMap.get(location.pathname);
   const { t, i18n } = useTranslation();
 
+  // 搜索框
+  const {onChangeValue} =useContext(MyContext);
+  
   return (
     <Flex wrap="wrap">
       <Layout style={layoutStyle}>
@@ -115,18 +118,20 @@ const App: React.FC = () => {
               <span>{ !!route? t(route.key) : t('application') }</span>
             </Col>
             <Col span={7} style={searchInputColStyle}>
-                <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />} />
+                <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />}   onChange={(e)=>onChangeValue(e.target.value)}      />
             </Col>
           </Row>
         <Layout>
           <Sider width="11%" style={siderStyle}>
               <SideMenu />
           </Sider>
-          <Content style={contentStyle}>
-            <Outlet/>
+          
+          <Content style={contentStyle}  >
+            <Outlet />
           </Content>
         </Layout>
       </Layout>
+      
     </Flex>
   )
 };
