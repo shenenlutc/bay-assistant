@@ -1,0 +1,35 @@
+//常见问题样式
+.issue {
+ 
+    
+li.ant-list-item.grey-background {
+    padding: 0px 0px;
+}
+li.ant-list-item.white-background {
+    padding: 0px 0px;
+}
+:where(.css-dev-only-do-not-override-1uweeqc).ant-list-bordered.ant-list-lg .ant-list-item, :where(.css-dev-only-do-not-override-1uweeqc).ant-list-bordered.ant-list-lg .ant-list-header, :where(.css-dev-only-do-not-override-1uweeqc).ant-list-bordered.ant-list-lg .ant-list-footer {
+    padding: 16px 0px; 
+}
+
+p {
+    width: 100%;
+    margin: 0;
+}
+
+.white-background {
+    background-color: #eeeeee;
+}
+// 灰色背景
+.grey-background {
+    background-color: #e3e3e3;
+}
+.title {
+    font-weight: bold; //字体加粗
+    .typographyText {
+        font-weight: bold; //字体加粗
+        padding-left: 24px;
+    }
+}
+
+}

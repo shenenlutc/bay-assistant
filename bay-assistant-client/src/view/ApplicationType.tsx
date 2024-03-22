@@ -1,46 +1,19 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Col, Row, Button } from "antd";
+import { Button } from "antd";
 import logo from "../assets/img/logo.png"; //图标
 import "../i18n";
 import { useTranslation } from "react-i18next";
-import { log } from "console";
-import { Divider, List, Typography } from "antd";
+import {  List } from "antd";
 import "../assets/style/applicatType.scss";
-// const data = [
-//     {},
-//     {}
-//     'Racing car sprays burning fuel into crowd.',
-//     'Japanese princess to wed commoner.',
-//     'Australian walks 100km after outback crash.',
-//     'Man charged over missing wedding girl.',
-//     'Los Angeles battles huge wildfires.',
-//   ];
 
 const ApplicationType: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
   const { type } = useParams(); //获取路径上的参数 值
   const [data, setData] = useState([]); // 用于存储获取的数据
 
-  //   const getByAppCategoryId = async (type: any) => {
-  //     try {
-  //       await axios
-  //         .get("/api/application/getByAppCategoryId", {
-  //           params: { appCategoryId: type },
-  //         })
-  //         .then((response) => {
-  //           setData(response.data); // 设置数据状态
-  //           console.log("后端返回的数据：======", response.data);
-  //         });
-  //     } catch (error) {
-  //       console.error("Error fetching data: ", error); // 错误处理
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     getByAppCategoryId(type);
-  //   }, []);
+ 
   useEffect(() => {
     axios
       .get("/api/application/getByAppCategoryId", {
@@ -48,7 +21,6 @@ const ApplicationType: React.FC = () => {
       })
       .then((response) => {
         setData(response.data); // 设置数据状态
-        console.log("后端返回的数据：======", response.data);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理
@@ -64,7 +36,6 @@ const ApplicationType: React.FC = () => {
 
   }[] = data;
 
-  const test ="这是宣抚心网上的方法看啥"
   return (
     <div className="applicationType">
       <List
