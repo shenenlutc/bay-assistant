@@ -29,4 +29,12 @@ public class ApplicationService {
         return applicationDao.findByAppCategoryIdAndMarkForDelete(appCategoryId,false);
     }
 
+    public List<Application> findByAppCategoryIdAndName(long appCategoryId,String name){
+        return applicationDao.findByAppCategoryIdAndAppNameOrAppEname(appCategoryId,false,name);
+    }
+
+    public List<Application> findByName(String name){
+        return applicationDao.findByAppNameOrAppEname(false,name);
+    }
+
 }

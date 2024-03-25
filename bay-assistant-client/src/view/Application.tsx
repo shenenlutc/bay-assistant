@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { Col, Row, Button } from 'antd';
-import logo from '../assets/img/logo.png'; //图标
-import { List, ListRowRenderer, AutoSizer} from 'react-virtualized';
-import '../assets/style/applicant.scss';
-import { formatData } from '../utils/formatData';
-import '../i18n';
-import { useTranslation } from 'react-i18next';
+import axios from "axios";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Col, Row, Button } from "antd";
+import { List, ListRowRenderer, AutoSizer } from "react-virtualized";
+import "../assets/style/applicant.scss";
+import { formatData } from "../utils/formatData";
+import "../i18n";
+import { useTranslation } from "react-i18next";
+import { MyContext } from "../component/search/searchConst";
 
 //索引标题高度
 const TITLE_HEIGHT = 36;
@@ -19,18 +19,54 @@ const Application: React.FC = () => {
   const { categoryId } = useParams(); //获取路径上的参数
   const [data, setData] = useState([]); // 用于存储获取的数据
   const myListRef = useRef<List>(null);
-
-
-  useEffect(() => {
+  const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
+  const { value } = useContext(MyContext); //头部搜索框传递过来的值
+  const prevValue = useRef(value);
+  //获取所有数据
+  const getList = () => {
     axios
-      .get('/api/application/list')
+      .get("/api/application/list")
       .then((response) => {
         setData(response.data); // 设置数据状态
-        console.log("后端返回的数据：======",response.data);
-        
+        console.log("后端返回的数据：======", response.data);
       })
       .catch((error) => {
-        console.error('Error fetching data: ', error); // 错误处理
+        console.error("Error fetching data: ", error); // 错误处理
+      });
+  };
+
+  useEffect(() => {
+    if (prevValue.current !== value) {
+      prevValue.current = value;
+      if (value.trim() != null && value.trim() != "") {
+        axios
+          .get("/api/application/getByName", {
+            params: { name: value },
+          })
+          .then((response) => {
+            setData(response.data); // 设置数据状态
+            console.log("response.data=====", response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data: ", error); // 错误处理
+          });
+      } else {
+        //重新查询所有
+        getList();
+      }
+    }
+  }, [value]);
+
+  useEffect(() => {
+    getList(); //获取所有数据的方法
+    //获取的filenet数据
+    axios
+      .get("/api/filenet/list")
+      .then((response) => {
+        setFilenetData(response.data); // 设置数据状态
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error); // 错误处理
       });
   }, []);
 
@@ -47,19 +83,29 @@ const Application: React.FC = () => {
   const rowRenderer: ListRowRenderer = ({ index, key, style }) => {
     const letter = dataIndex[index];
     return (
-      <div key={key} style={style} className='dataCss'>
-        <div className='title'>{letter}</div>
-        <Row className='applicationRow'>
+      <div key={key} style={style} className="dataCss">
+        <div className="title">{letter}</div>
+        <Row className="applicationRow">
           {datas[letter].map((item: any) => (
-            <div className='name' key={item.id}>
-              <Col span={8} className='applicationCol'>
-                <img src={logo} style={{ backgroundColor: 'rgb(98, 0, 255)' }} />
-                <span className='colSpan' title={item.appEname}>
-                  <span className='descriptionSpan'> {i18n.language == 'zh' ? item.description : item.appDescription}</span>
-                  <Button type='primary'>{t('more')}</Button>
+            <div className="name" key={item.id}>
+              <Col span={8} className="applicationCol">
+                <img
+                  src={appIconSrc(item.appIcon)}
+                  style={{ width: "80px", height: "80px" }}
+                />
+                <span className="colSpan" title={item.appEname}>
+                  <span className="descriptionSpan">
+                    {" "}
+                    {i18n.language == "zh"
+                      ? item.description
+                      : item.appDescription}
+                  </span>
+                  <Button type="primary">{t("more")}</Button>
                 </span>
-                <p>{i18n.language == 'zh' ? item.appName : item.appEname}</p>
               </Col>
+              <p style={{ display: "flex", justifyContent: "center" }}>
+                {i18n.language == "zh" ? item.appName : item.appEname}
+              </p>
             </div>
           ))}
         </Row>
@@ -70,16 +116,19 @@ const Application: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0); //指定右侧字母索引列表高亮的索引号
 
   function renderRightIndex(): JSX.Element[] {
-    return dataIndex.map((item:any, index:any) => (
+    return dataIndex.map((item: any, index: any) => (
       <li
-        className='dataIndex-item'
+        className="dataIndex-item"
         key={item}
         onClick={() => {
-            console.log("索引号：===",index);
-            
+          console.log("索引号：===", index);
+
           myListRef.current?.scrollToRow(index);
-        }}>
-        <span className={activeIndex === index ? 'index-active' : ''}>{item}</span>
+        }}
+      >
+        <span className={activeIndex === index ? "index-active" : ""}>
+          {item}
+        </span>
       </li>
     ));
   }
@@ -91,13 +140,43 @@ const Application: React.FC = () => {
       setActiveIndex(startIndex);
     }
   };
- 
+
+  const filenetDatas: {
+    id: number;
+    filePath: string;
+  }[] = filenetData;
+  //图标
+  const appIconSrc = (appIconId: number) => {
+    const filePath = filenetDatas.find((obj) => obj.id === appIconId)?.filePath;
+    let path = filePath?.replaceAll("\\", "/");
+    let icon;
+    try {
+      icon = require("../assets/" + path);
+    } catch (error) {
+      console.log("查找图片失败：", error);
+    }
+    return icon;
+  };
   return (
-    <div className='applicant'>
+    <div className="applicant">
       {/* 列表数据 */}
-      <AutoSizer>{({ width, height }) => <List ref={myListRef} width={width} height={height} rowCount={dataIndex.length} rowHeight={getRowHeight} rowRenderer={rowRenderer} onRowsRendered={({ startIndex }) => onRowsRendered(startIndex)} scrollToAlignment='start'  scrollToIndex={-1} />}</AutoSizer>
+      <AutoSizer>
+        {({ width, height }) => (
+          <List
+            ref={myListRef}
+            width={width}
+            height={height}
+            rowCount={dataIndex.length}
+            rowHeight={getRowHeight}
+            rowRenderer={rowRenderer}
+            onRowsRendered={({ startIndex }) => onRowsRendered(startIndex)}
+            scrollToAlignment="start"
+            scrollToIndex={-1}
+          />
+        )}
+      </AutoSizer>
       {/* 右侧索引列表 */}
-      <ul className='dataIndex'>{renderRightIndex()}</ul>
+      <ul className="dataIndex">{renderRightIndex()}</ul>
     </div>
   );
 };
