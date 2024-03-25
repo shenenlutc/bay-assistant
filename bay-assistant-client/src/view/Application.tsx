@@ -90,7 +90,7 @@ const Application: React.FC = () => {
             <div className="name" key={item.id}>
               <Col span={8} className="applicationCol">
                 <img
-                  src={appIconSrc(item.appIcon)}
+                  src={"/api/file/download?id=".concat(item.appIcon)}
                   style={{ width: "80px", height: "80px" }}
                 />
                 <span className="colSpan" title={item.appEname}>
@@ -141,22 +141,6 @@ const Application: React.FC = () => {
     }
   };
 
-  const filenetDatas: {
-    id: number;
-    filePath: string;
-  }[] = filenetData;
-  //图标
-  const appIconSrc = (appIconId: number) => {
-    const filePath = filenetDatas.find((obj) => obj.id === appIconId)?.filePath;
-    let path = filePath?.replaceAll("\\", "/");
-    let icon;
-    try {
-      icon = require("../assets/" + path);
-    } catch (error) {
-      console.log("查找图片失败：", error);
-    }
-    return icon;
-  };
   return (
     <div className="applicant">
       {/* 列表数据 */}

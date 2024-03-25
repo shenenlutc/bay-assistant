@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilenetService {
@@ -14,5 +15,10 @@ public class FilenetService {
     FilenetDao filenetDao;
     public List<Filenet> findByMarkForDelete(){
         return filenetDao.findByMarkForDelete(false);
+    }
+
+    public Filenet findById(long id){
+        Optional<Filenet> byId = filenetDao.findById(id);
+        return byId.orElse(null);
     }
 }
