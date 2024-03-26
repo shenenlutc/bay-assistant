@@ -85,16 +85,29 @@ const searchInputColStyle : React.CSSProperties = {
 const searchInputStyle : React.CSSProperties = {
   // verticalAlign: '-40px',
 }
+// 存储一个值
+function saveValue(key: string, value: string) {
+  localStorage.setItem(key, value);
+}
+// 获取一个值
+function getValue(key: string): string | null {
+  return localStorage.getItem(key);
+}
 
 
 const App: React.FC = () => {
   const location = useLocation();
   const route = routesMap.get(location.pathname);
   const { t, i18n } = useTranslation();
-
   // 搜索框
   const {onChangeValue} =useContext(MyContext);
-  
+
+  const { value } = useContext(MyContext); //应用页面传递信息，设置头部信息
+  if (value != "") {
+    saveValue("headTitle", value);
+  }
+  const headTitle = getValue("headTitle");
+
   return (
     <Flex wrap="wrap">
       <Layout style={layoutStyle}>
@@ -116,7 +129,7 @@ const App: React.FC = () => {
               </div>
             </Col>
             <Col span={6} style={headerTextStyle}>
-              <span>{ !!route? t(route.key) : t('application') }</span>
+              <span>{ !!route? t(route.key) : t(String(headTitle)) }</span>
             </Col>
             <Col span={7} style={searchInputColStyle}>
                 <Input  style={searchInputStyle} size="large" placeholder={t('searchApp')} prefix={<SearchOutlined />}   onChange={(e)=>onChangeValue(e.target.value)}      />

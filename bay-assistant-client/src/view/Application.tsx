@@ -16,7 +16,6 @@ const NAME_HEIGHT = 200;
 
 const Application: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
-  const { categoryId } = useParams(); //获取路径上的参数
   const [data, setData] = useState([]); // 用于存储获取的数据
   const myListRef = useRef<List>(null);
   const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
@@ -30,7 +29,6 @@ const Application: React.FC = () => {
       .get("/api/application/list")
       .then((response) => {
         setData(response.data); // 设置数据状态
-        console.log("后端返回的数据：======", response.data);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理
@@ -52,7 +50,6 @@ const Application: React.FC = () => {
           })
           .then((response) => {
             setData(response.data); // 设置数据状态
-            console.log("response.data=====", response.data);
           })
           .catch((error) => {
             console.error("Error fetching data: ", error); // 错误处理
@@ -137,8 +134,6 @@ const Application: React.FC = () => {
         className="dataIndex-item"
         key={item}
         onClick={() => {
-          console.log("索引号：===", index);
-
           myListRef.current?.scrollToRow(index);
         }}
       >
@@ -151,7 +146,6 @@ const Application: React.FC = () => {
 
   //用于获取list组件中渲染行的信息
   const onRowsRendered = (startIndex: number) => {
-    console.log(startIndex);
     if (activeIndex !== startIndex) {
       setActiveIndex(startIndex);
     }

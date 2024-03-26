@@ -1,13 +1,10 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { MyContext } from "../component/search/searchConst";
 import axios from "axios";
 import Application from "./Application";
 import { Button ,Modal} from "antd";
 import { useTranslation } from "react-i18next";
 import "../assets/style/applicationMore.scss";
-import logo from "../assets/img/logo.png";
-import { List } from "antd";
-import { title } from "process";
 
 // 存储一个值
 function saveValue(key: string, value: string) {
@@ -46,7 +43,6 @@ const ApplicationMore: React.FC = () => {
       })
       .then((response) => {
         setAapplicationData(response.data); // 设置数据状态
-        console.log("Applicantion有数据=====", response.data);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理

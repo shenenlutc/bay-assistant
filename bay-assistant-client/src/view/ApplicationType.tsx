@@ -40,7 +40,6 @@ const ApplicationType: React.FC = () => {
           })
           .then((response) => {
             setData(response.data); // 设置数据状态
-            console.log("response.data=====", response.data);
           })
           .catch((error) => {
             console.error("Error fetching data: ", error); // 错误处理
