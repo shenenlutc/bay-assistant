@@ -14,7 +14,6 @@ const ApplicationType: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
   const { type } = useParams(); //获取路径上的参数 值
   const [data, setData] = useState([]); // 用于存储获取的数据
-  const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
   const { value } = useContext(MyContext); //头部搜索框传递过来的值
   const prevValue = useRef(value);
   //根据分类获取所有数据
@@ -55,15 +54,6 @@ const ApplicationType: React.FC = () => {
 
   useEffect(() => {
     getByAppCategoryId(); //根据分类获取所有数据
-    //获取的filenet数据
-    axios
-      .get("/api/filenet/list")
-      .then((response) => {
-        setFilenetData(response.data); // 设置数据状态
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error); // 错误处理
-      });
   }, []);
 
   const datas: {
@@ -74,22 +64,7 @@ const ApplicationType: React.FC = () => {
     appDescription: string;
     appIcon: number;
   }[] = data;
-  const filenetDatas: {
-    id: number;
-    filePath: string;
-  }[] = filenetData;
-  //图标
-  const appIconSrc = (appIconId: number) => {
-    const filePath = filenetDatas.find((obj) => obj.id === appIconId)?.filePath;
-    let path = filePath?.replaceAll("\\", "/");
-    let icon;
-    try {
-      icon = require("../assets/" + path);
-    } catch (error) {
-      console.log("查找图片失败：", error);
-    }
-    return icon;
-  };
+ 
 //更多按钮
 const {onChangeValue} =useContext(MyContext);
 
@@ -98,11 +73,11 @@ const {onChangeValue} =useContext(MyContext);
       <List
         grid={{ gutter: 60, column: 3 }}
         dataSource={datas}
-        renderItem={(item) => (
+        renderItem={(item:any) => (
           <List.Item>
             <div className="subelement">
               <img
-                src={appIconSrc(item.appIcon)}
+               src={"/api/file/download?id=".concat(item.appIcon)}
                 className="imgStyle"
                 style={{ width: "80px", height: "80px" }}
               />

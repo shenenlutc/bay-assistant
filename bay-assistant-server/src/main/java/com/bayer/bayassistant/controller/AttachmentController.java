@@ -25,12 +25,12 @@ public class AttachmentController {
     }
 
     /**
-     * 根据appid查询app下的图片
+     * 根据appid查询app下的filenet
      * @param appId
-     * @return 图片路径集合
+     * @return filenetId集合
      */
-    @GetMapping("/getByAppId")
-    public List<String> getByAppId(@RequestParam("appId") long appId){
-        return attachmentService.getByAppId(appId);
+    @GetMapping("/getAttachmentByAppId")
+    public List<Long> getAttachmentByAppId(@RequestParam("appId") long appId){
+        return attachmentService.getAttachmentByAppId(appId);
     }
 }

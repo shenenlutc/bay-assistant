@@ -22,10 +22,9 @@ public class AttachmentService {
         return attachmentDao.findByAppIdAndMarkForDelete(appid,false);
     }
 
-    public List<String> getByAppId( long appid){
-        List<Long> filenetIds = attachmentDao.findByAppIdAndMarkForDelete(appid, false).stream().map(Attachment::getFilenetId).collect(Collectors.toList());
-        List<String> filePath = filenetDao.findAllByInIds(filenetIds);
-        return filePath;
+
+    public List<Long> getAttachmentByAppId( long appid){
+        return attachmentDao.findByAppIdAndMarkForDelete(appid, false).stream().map(Attachment::getFilenetId).collect(Collectors.toList());
     }
 
 }

@@ -31,17 +31,13 @@ interface Application {
 const ApplicationMore: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
   const [applicationData, setAapplicationData] = useState<Application>(); // 用于存储获取的数据
-  const [attachmentData, setAttachmentData] = useState([]); // 用于存储获取的数据
-  const [filePathData, setFilePathData] = useState([]); // 用于存储获取的数据
-  const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
+  const [filenetIdsData, setFilenetIdsData] = useState([]); // 用于存储获取的数据
   const { value } = useContext(MyContext); //更多按钮传递过来的appId值
   if (value != "") {
     saveValue("appId", value);
   }
 
   const appId = getValue("appId");
-  console.log("appId===", appId);
-
   //根据appId获取Applicantion有数据
   const getApplicantion = () => {
     axios
@@ -56,40 +52,14 @@ const ApplicationMore: React.FC = () => {
         console.error("Error fetching data: ", error); // 错误处理
       });
   };
-  //根据appId获取Attachment有数据
-  const getAttachment = () => {
-    axios
-      .get("/api/attachment/getListByAppId", {
-        params: { appId: appId },
-      })
-      .then((response) => {
-        setAttachmentData(response.data); // 设置数据状态
-        console.log("Attachment有数据=====", response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error); // 错误处理
-      });
-  };
-  //获取的filenet数据
-  const getfilenetList = () => {
-    axios
-      .get("/api/filenet/list")
-      .then((response) => {
-        setFilenetData(response.data); // 设置数据状态
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error); // 错误处理
-      });
-  };
   //更多内部信息图片：根据appId获取Attachment有数据
   const getFilenetByAppId = () => {
     axios
-      .get("/api/attachment/getByAppId", {
+      .get("/api/attachment/getAttachmentByAppId", {
         params: { appId: appId },
       })
       .then((response) => {
-        setFilePathData(response.data); // 设置数据状态
-        console.log("更多内部信息图片：=====", response.data);
+        setFilenetIdsData(response.data); // 设置数据状态
       })
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理
@@ -97,42 +67,12 @@ const ApplicationMore: React.FC = () => {
   };
   useEffect(() => {
     getApplicantion(); //根据appId获取Applicantion有数据
-    getAttachment(); //根据appId获取Attachment有数据
-    getfilenetList(); //获取的filenet数据
     getFilenetByAppId(); //更多内部信息图片：根据appId获取Attachment有数据
   }, []);
 
-  const filenetDatas: {
-    id: number;
-    filePath: string;
-  }[] = filenetData;
-
-  //图标
-  const appIconSrc = (appIconId: any) => {
-    const filePath = filenetDatas.find((obj) => obj.id === appIconId)?.filePath;
-    let path = filePath?.replaceAll("\\", "/");
-    let icon;
-    try {
-      icon = require("../assets/" + path);
-    } catch (error) {
-      console.log("查找图片失败：", error);
-    }
-    return icon;
-  };
-  //内部图片
-  const appImgSrc = (filePath: string) => {
-    let path = filePath?.replaceAll("\\", "/");
-    let img;
-    try {
-      img = require("../assets/" + path);
-    } catch (error) {
-      console.log("查找图片失败：", error);
-    }
-    return img;
-  };
+ 
  //appType== Native打开小窗口
  const [open, setOpen] = useState(false);
-//  const [loading, setLoading] = useState(false);
  const handleOk = () => {
   setOpen(false);
 };
@@ -142,15 +82,11 @@ const handleCancel = () => {
 };
 
   const openNewWindow = (appUrl: any) => {
-    console.log("applicationData?.appType=====",applicationData?.appType);
    if(applicationData?.appType==="Native"){
     // Native
-    // const showModal = () => {
       setOpen(true);
-    // };
    }else{
     // web
-  
     if (appUrl != undefined && appUrl != null && appUrl != "") {
       window.open(appUrl, "_blank");
     } else {
@@ -162,7 +98,7 @@ const handleCancel = () => {
   return (
     <div className="applicationMore">
       <div className="icon">
-        <img src={appIconSrc(applicationData?.appIcon)} style={{height:"160px"}} />
+        <img src={"/api/file/download?id=".concat(String(applicationData?.appIcon))} style={{height:"160px"}} />
       </div>
       <div className="content">
         <div className="text">
@@ -182,8 +118,8 @@ const handleCancel = () => {
       </div>
 
       <div className="gallery-container">
-        {filePathData.map((filePath) => (
-          <img src={appImgSrc(filePath)} className="img" />
+        {filenetIdsData.map((filenetId) => (
+          <img src={"/api/file/download?id=".concat(filenetId)} className="img" />
         ))}
       </div>
       <div>
