@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Col, Row, Button } from "antd";
 import { List, ListRowRenderer, AutoSizer } from "react-virtualized";
 import "../assets/style/applicant.scss";
@@ -22,6 +22,8 @@ const Application: React.FC = () => {
   const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
   const { value } = useContext(MyContext); //头部搜索框传递过来的值
   const prevValue = useRef(value);
+  //更多按钮
+  const { onChangeValue } = useContext(MyContext);
   //获取所有数据
   const getList = () => {
     axios
@@ -38,7 +40,12 @@ const Application: React.FC = () => {
   useEffect(() => {
     if (prevValue.current !== value) {
       prevValue.current = value;
-      if (value.trim() != null && value.trim() != "") {
+      if (
+        value != null &&
+        value != "" &&
+        value.trim() != null &&
+        value.trim() != ""
+      ) {
         axios
           .get("/api/application/getByName", {
             params: { name: value },
@@ -100,7 +107,16 @@ const Application: React.FC = () => {
                       ? item.description
                       : item.appDescription}
                   </span>
-                  <Button type="primary">{t("more")}</Button>
+                  <Link to="/application/more">
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        onChangeValue(item.id);
+                      }}
+                    >
+                      {t("more")}
+                    </Button>
+                  </Link>
                 </span>
               </Col>
               <p style={{ display: "flex", justifyContent: "center" }}>

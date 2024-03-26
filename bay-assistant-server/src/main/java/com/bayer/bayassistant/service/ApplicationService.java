@@ -37,4 +37,8 @@ public class ApplicationService {
         return applicationDao.findByAppNameOrAppEname(false,name);
     }
 
+    public Application findByIdAndMarkForDelete(long appId){
+        return applicationDao.findByIdAndMarkForDelete(appId,false);
+    }
+
 }

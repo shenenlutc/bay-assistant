@@ -45,4 +45,9 @@ public class ApplicationController {
         return applicationService.findByName(name);
     }
 
+    @GetMapping("getApplicantionById")
+    public Application getApplicantionById(@RequestParam("appId") long appId) {
+        return applicationService.findByIdAndMarkForDelete(appId);
+    }
+
 }

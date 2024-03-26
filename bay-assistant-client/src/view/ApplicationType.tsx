@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import { Button } from "antd";
 import "../i18n";
 import { useTranslation } from "react-i18next";
 import { List } from "antd";
 import "../assets/style/applicatType.scss";
 import { MyContext } from "../component/search/searchConst";
+
+
 
 const ApplicationType: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
@@ -32,7 +34,7 @@ const ApplicationType: React.FC = () => {
   useEffect(() => {
     if (prevValue.current !== value) {
       prevValue.current = value;
-      if (value.trim() != null && value.trim() != "") {
+      if (value!=null && value!="" && value.trim() != null && value.trim() != "") {
         axios
           .get("/api/application/getByAppCategoryIdAndName", {
             params: { appCategoryId: type, name: value },
@@ -88,6 +90,8 @@ const ApplicationType: React.FC = () => {
     }
     return icon;
   };
+//更多按钮
+const {onChangeValue} =useContext(MyContext);
 
   return (
     <div className="applicationType">
@@ -116,9 +120,11 @@ const ApplicationType: React.FC = () => {
                     : item.appDescription}
                 </span>
                 <p>
-                  <Button type="primary" className="button" size="small">
+                <Link to='/application/more'>
+                  <Button type="primary" className="button" size="small" onClick={()=>{onChangeValue(item.id)}}>
                     {t("more")}
                   </Button>
+                </Link>
                 </p>
               </span>
               <p>{i18n.language == "zh" ? item.appName : item.appEname}</p>

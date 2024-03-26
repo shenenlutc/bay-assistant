@@ -21,4 +21,6 @@ public interface ApplicationDao extends JpaRepository<Application, Long>, Serial
         @Query("select app from Application app where app.markForDelete=:flag and ( LOWER(app.appName) LIKE LOWER( CONCAT('%',:name,'%' )) OR LOWER(app.appEname) LIKE LOWER( CONCAT('%',:name,'%')))")
         List<Application> findByAppNameOrAppEname( @Param("flag") Boolean flag,@Param("name") String name);
 
+        Application findByIdAndMarkForDelete(long id,boolean flag);
+
 }

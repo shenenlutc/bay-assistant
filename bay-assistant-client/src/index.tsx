@@ -8,6 +8,7 @@ import {routes} from './router';
 import Application from './view/Application';
 import ApplicationType from "./view/ApplicationType"
 import { MyContext } from './component/search/searchConst'
+import ApplicationMore from './view/ApplicationMore';
 
 const router = createHashRouter([
     {
@@ -29,6 +30,10 @@ const router = createHashRouter([
             {
                 path: "application/:type",
                 element: <ApplicationType />,
+            },
+            {
+                path: "application/more",
+                element: <ApplicationMore />,
             },
             ...routes.map(r=>{
                 return {
