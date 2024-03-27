@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { MyContext } from "../component/search/searchConst";
 import axios from "axios";
 import Application from "./Application";
-import { Button ,Modal} from "antd";
+import { Button, Modal } from "antd";
 import { useTranslation } from "react-i18next";
 import "../assets/style/applicationMore.scss";
 
@@ -66,35 +66,49 @@ const ApplicationMore: React.FC = () => {
     getFilenetByAppId(); //更多内部信息图片：根据appId获取Attachment有数据
   }, []);
 
- 
- //appType== Native打开小窗口
- const [open, setOpen] = useState(false);
- const handleOk = () => {
-  setOpen(false);
-};
+  //appType== Native打开小窗口
+  const [open, setOpen] = useState(false);
+  const handleOk = () => {
+    setOpen(false);
+  };
 
-const handleCancel = () => {
-  setOpen(false);
-};
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   const openNewWindow = (appUrl: any) => {
-   if(applicationData?.appType==="Native"){
-    // Native
-      setOpen(true);
-   }else{
-    // web
-    if (appUrl != undefined && appUrl != null && appUrl != "") {
-      window.open(appUrl, "_blank");
+    if (applicationData?.appType === "Native") {
+      // Native
+      if (applicationData.appUrl === "ibooks") {
+        try {
+          // 使用JavaScript的window.location.href来跳转到指定的URL Scheme
+          window.location.href = "ibooks://";
+        } catch (err) {
+          console.error("打开ibooks失败", err);
+          setOpen(true);
+        }
+      } else {
+        setOpen(true);
+      }
     } else {
-      window.open("https://www.baidu.com/", "_blank");
+      // web
+      if (appUrl != undefined && appUrl != null && appUrl != "") {
+        window.open(appUrl, "_blank");
+      } else {
+        window.open("https://www.baidu.com/", "_blank");
+      }
     }
-  }  
   };
 
   return (
     <div className="applicationMore">
       <div className="icon">
-        <img src={"/api/file/download?id=".concat(String(applicationData?.appIcon))} style={{height:"160px"}} />
+        <img
+          src={"/api/file/download?id=".concat(
+            String(applicationData?.appIcon)
+          )}
+          style={{ height: "160px" }}
+        />
       </div>
       <div className="content">
         <div className="text">
@@ -103,7 +117,7 @@ const handleCancel = () => {
             : applicationData?.appEname}
         </div>
         <Button
-        className="openButton"
+          className="openButton"
           type="primary"
           onClick={() => {
             openNewWindow(applicationData?.appUrl);
@@ -115,7 +129,10 @@ const handleCancel = () => {
 
       <div className="gallery-container">
         {filenetIdsData.map((filenetId) => (
-          <img src={"/api/file/download?id=".concat(filenetId)} className="img" />
+          <img
+            src={"/api/file/download?id=".concat(filenetId)}
+            className="img"
+          />
         ))}
       </div>
       <div>
@@ -145,7 +162,7 @@ const handleCancel = () => {
               style={{ display: "block", margin: "0 auto" }}
               onClick={handleOk}
             >
-             {t("confirmButton")}
+              {t("confirmButton")}
             </Button>
           </div>
         }
