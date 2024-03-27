@@ -12,6 +12,10 @@
     "myUsual": "Favourite",
     "marketing": "Marketing & Sales",
     
-    "more":"more",
+    "more":"More",
+    "open":"Open",
+    "applicationDescription":"Decription:",
+    "title":"Title",
+    "confirmButton":"Ok",
     "applyHelp":"applyHelp"
 }

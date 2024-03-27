@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Col, Row, Button } from "antd";
 import { List, ListRowRenderer, AutoSizer } from "react-virtualized";
 import "../assets/style/applicant.scss";
@@ -16,19 +16,19 @@ const NAME_HEIGHT = 200;
 
 const Application: React.FC = () => {
   const { t, i18n } = useTranslation(); //语言切换
-  const { categoryId } = useParams(); //获取路径上的参数
   const [data, setData] = useState([]); // 用于存储获取的数据
   const myListRef = useRef<List>(null);
   const [filenetData, setFilenetData] = useState([]); // 用于存储获取的filenet数据
   const { value } = useContext(MyContext); //头部搜索框传递过来的值
   const prevValue = useRef(value);
+  //更多按钮
+  const { onChangeValue } = useContext(MyContext);
   //获取所有数据
   const getList = () => {
     axios
       .get("/api/application/list")
       .then((response) => {
         setData(response.data); // 设置数据状态
-        console.log("后端返回的数据：======", response.data);
       })
       .catch((error) => {
         console.error("Error fetching data: ", error); // 错误处理
@@ -38,14 +38,18 @@ const Application: React.FC = () => {
   useEffect(() => {
     if (prevValue.current !== value) {
       prevValue.current = value;
-      if (value.trim() != null && value.trim() != "") {
+      if (
+        value != null &&
+        value != "" &&
+        value.trim() != null &&
+        value.trim() != ""
+      ) {
         axios
           .get("/api/application/getByName", {
             params: { name: value },
           })
           .then((response) => {
             setData(response.data); // 设置数据状态
-            console.log("response.data=====", response.data);
           })
           .catch((error) => {
             console.error("Error fetching data: ", error); // 错误处理
@@ -100,7 +104,16 @@ const Application: React.FC = () => {
                       ? item.description
                       : item.appDescription}
                   </span>
-                  <Button type="primary">{t("more")}</Button>
+                  <Link to="/application/more">
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        onChangeValue(item.id);
+                      }}
+                    >
+                      {t("more")}
+                    </Button>
+                  </Link>
                 </span>
               </Col>
               <p style={{ display: "flex", justifyContent: "center" }}>
@@ -121,8 +134,6 @@ const Application: React.FC = () => {
         className="dataIndex-item"
         key={item}
         onClick={() => {
-          console.log("索引号：===", index);
-
           myListRef.current?.scrollToRow(index);
         }}
       >
@@ -135,7 +146,6 @@ const Application: React.FC = () => {
 
   //用于获取list组件中渲染行的信息
   const onRowsRendered = (startIndex: number) => {
-    console.log(startIndex);
     if (activeIndex !== startIndex) {
       setActiveIndex(startIndex);
     }

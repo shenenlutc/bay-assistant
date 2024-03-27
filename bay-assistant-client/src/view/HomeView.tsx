@@ -10,6 +10,8 @@ import myUsualIcon from '../assets/img/myUsualIcon.png';
 import marketingIcon from '../assets/img/marketingIcon.png';
 import { useTranslation } from "react-i18next";
 import "../i18n";
+import React, { useContext } from "react";
+import { MyContext } from "../component/search/searchConst";
 
 const row1Style : React.CSSProperties = {
     height: '35%'
@@ -45,6 +47,9 @@ const home3ImgStyle : React.CSSProperties = {
 
 const HomeView: React.FC = () => {
     const { t } = useTranslation();
+    //传递市场营销，办公助手..给头部显示
+    const { value } = useContext(MyContext); //头部搜索框传递过来的值
+    const {onChangeValue} =useContext(MyContext)
     return (
         <>
             <Row style={row1Style}>
@@ -59,7 +64,7 @@ const HomeView: React.FC = () => {
             <Row style={row2Style}  justify="end">
                 <Col span={8}>
                     <div>
-                        <Link to='/application/all'>
+                        <Link to='/application/all' onClick={()=>{onChangeValue('allApp')}}>
                             <img src={allAppIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -69,7 +74,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={8}>
                     <div>
-                        <Link to='/application/1'>
+                        <Link to='/application/1' onClick={()=>{onChangeValue('claimPersonnel')}}>
                             <img src={claimPersonnelIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -79,7 +84,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={8}>
                     <div>
-                        <Link to='/application/4'>
+                        <Link to='/application/4' onClick={()=>{onChangeValue('office')}}>
                             <img src={officeIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -91,7 +96,7 @@ const HomeView: React.FC = () => {
             <Row style={row2Style}  justify="end">
                 <Col span={12}>
                     <div>
-                        <Link to='/application/2'>
+                        <Link to='/application/2' onClick={()=>{onChangeValue('myUsual')}}>
                             <img src={myUsualIcon} alt='logo'></img>
                         </Link>
                     </div>
@@ -101,7 +106,7 @@ const HomeView: React.FC = () => {
                 </Col>
                 <Col span={12}>
                     <div>
-                        <Link to='/application/3'>
+                        <Link to='/application/3' onClick={()=>{onChangeValue('marketing')}}>
                             <img src={marketingIcon} alt='logo'></img>
                         </Link>
                     </div>
