@@ -25,20 +25,20 @@ const colStyle : React.CSSProperties = {
 }
 
 const home1ImgStyle : React.CSSProperties = {
-    paddingLeft: '10px',
-    paddingTop: '10px',
-    paddingRight: '8px',
+    paddingLeft: '1%',
+    paddingTop: '1%',
+    paddingRight: '1%',
     width: '100%',
-    height: '100%'
+    height: '99%'
 }
 const home2ImgStyle : React.CSSProperties = {
-    paddingTop: '10px',
-    paddingRight: '10px',
+    paddingTop: '2%',
+    paddingRight: '1%',
     width: '100%',
-    height: '49%'
+    height: '48%'
 }
 const home3ImgStyle : React.CSSProperties = {
-    paddingRight: '10px',
+    paddingRight: '1%',
     width: '100%',
     height: '50%'
 }
@@ -62,7 +62,6 @@ const HomeView: React.FC = () => {
                         <Link to='/application/all'>
                             <img src={allAppIcon} alt='logo'></img>
                         </Link>
-                       
                     </div>
                     <div>
                         <span>{t('allApp')}</span>

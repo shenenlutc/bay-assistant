@@ -24,10 +24,11 @@ const layoutStyle = {
 };
 
 const siderStyle: React.CSSProperties = {
+  paddingTop: "2%",
   color: '#fff',
   backgroundColor:  '#047EA3',
   // height:'1200px',
-  minHeight: '91vh',
+  minHeight: '89vh',
   overflow: 'auto',
 };
 
@@ -36,7 +37,7 @@ const contentStyle: React.CSSProperties = {
   // fontFamily:'var(--FZXH1JW)',
   color: '#000',
   backgroundColor: '#EDEDED',
-  minHeight: '91vh',
+  minHeight: '89vh',
   // height: '1200px',
   // overflow: 'auto',
 };
@@ -58,6 +59,7 @@ const headerRow2Style : React.CSSProperties = {
 
 const logoStyle : React.CSSProperties = {
   width: '80%',
+  paddingTop:'2%',
   paddingLeft: '10%'
 }
 const headerTextStyle : React.CSSProperties = {
