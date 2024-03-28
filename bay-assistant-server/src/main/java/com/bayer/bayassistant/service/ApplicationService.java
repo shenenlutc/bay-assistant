@@ -27,7 +27,7 @@ public class ApplicationService {
     public List<Application> findByMarkForDelete(){
         List<String> appRights = new ArrayList<>();
         appRights.add("All");
-        appRights.add("2");//BHC
+        appRights.add("1");//BHC
         return applicationDao.findByMarkForDelete(appRights,false);
     }
     public List<Application> findByAppCategoryId(long appCategoryId){
@@ -42,17 +42,17 @@ public class ApplicationService {
                 break;
             case 3:
                 //市场及营销
-                appRights.add("2");//BHC
+                appRights.add("1");//BHC
                 break;
             case 4:
                 //办公助手
                 appRights.add("All");
-                appRights.add("2");//BHC
+                appRights.add("1");//BHC
                 break;
             default:
                 //所有应用
                 appRights.add("All");
-                appRights.add("2");//BHC
+                appRights.add("1");//BHC
 
         }
         List<Application> getApplicationByAppCategoryId ;
