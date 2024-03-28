@@ -3,6 +3,7 @@ package com.bayer.bayassistant.service;
 
 import com.bayer.bayassistant.dao.ApplicationDao;
 import com.bayer.bayassistant.entity.Application;
+import com.bayer.bayassistant.enums.AppRightEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -35,24 +36,24 @@ public class ApplicationService {
         switch ((int) appCategoryId){
             case 1:
                 //报销及人事
-                appRights.add("All");
+                appRights.add(AppRightEnum.All.getValue());
                 break;
             case 2:
                 //我的常用
                 break;
             case 3:
                 //市场及营销
-                appRights.add("1");//BHC
+                appRights.add(AppRightEnum.BHC.getValue());//BHC
                 break;
             case 4:
                 //办公助手
-                appRights.add("All");
-                appRights.add("1");//BHC
+                appRights.add(AppRightEnum.All.getValue());
+                appRights.add(AppRightEnum.BHC.getValue());//BHC
                 break;
             default:
                 //所有应用
-                appRights.add("All");
-                appRights.add("1");//BHC
+                appRights.add(AppRightEnum.All.getValue());
+                appRights.add(AppRightEnum.BHC.getValue());//BHC
 
         }
         List<Application> getApplicationByAppCategoryId ;
